@@ -43,6 +43,7 @@
     become: yes
     service:
       name: 'httpd'
+      enabled: true
       state: 'restarted'
 
 

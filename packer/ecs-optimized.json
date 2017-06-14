@@ -1,0 +1,4 @@
+{
+    "base_ami": "ami-62d35c02",
+    "ami_name_prefix": "S17-Immersive"
+}

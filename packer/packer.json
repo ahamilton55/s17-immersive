@@ -1,0 +1,37 @@
+{
+  "variables": {
+    "ami_name": "",
+    "base_ami": "",
+    "build_date": ""
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "region": "us-west-2",
+    "source_ami": "{{user `base_ami`}}",
+    "instance_type": "t2.medium",
+    "ssh_username": "ec2-user",
+    "vpc_id": "vpc-898473e2",
+    "subnet_id": "subnet-8e8473e5",
+    "ami_name": "{{user `ami_name_prefix`}}-{{user `build_date`}}",
+    "tags": {
+      "build_date": "{{user `build_date`}}",
+      "base_ami": "{{user `base_ami`}}"
+    }
+  }],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "bootstrap.sh"
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "../ansible/web_server.yml",
+      "playbook_dir": "../ansible",
+      "inventory_groups": "immersive"
+    },
+    {
+      "type": "shell",
+      "script": "cleanup.sh"
+    }
+  ]
+}

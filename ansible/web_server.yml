@@ -36,7 +36,7 @@
   - name: "Copy over index.html"
     become: yes
     copy:
-      src: ../index.html
+      src: files/index.html
       dest: /var/www/demo/index.html
 
   - name: "Start httpd"
